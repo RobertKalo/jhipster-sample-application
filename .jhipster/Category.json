@@ -1,0 +1,27 @@
+{
+    "name": "Category",
+    "fields": [
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "recipe",
+            "otherEntityName": "recipe",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "category"
+        }
+    ],
+    "changelogDate": "20180807153957",
+    "entityTableName": "category",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

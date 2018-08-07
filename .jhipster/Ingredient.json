@@ -1,0 +1,38 @@
+{
+    "name": "Ingredient",
+    "fields": [
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "amount",
+            "fieldType": "BigDecimal"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "uom",
+            "otherEntityName": "unitOfMeasure",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "ingredient"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "recipe",
+            "otherEntityName": "recipe",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20180807153955",
+    "entityTableName": "ingredient",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
