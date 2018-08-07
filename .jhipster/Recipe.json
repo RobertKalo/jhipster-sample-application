@@ -1,0 +1,76 @@
+{
+    "name": "Recipe",
+    "fields": [
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "prepTime",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "cookTime",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "servings",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "source",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "url",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "directions",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "image",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "difficulty",
+            "fieldType": "Difficulty",
+            "fieldValues": "EASY,MEDIUM,HARD"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "notes",
+            "otherEntityName": "notes",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "recipe"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "ingredient",
+            "otherEntityName": "ingredient",
+            "otherEntityRelationshipName": "recipe"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "recipe",
+            "relationshipName": "category",
+            "otherEntityName": "category",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20180807153954",
+    "entityTableName": "recipe",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

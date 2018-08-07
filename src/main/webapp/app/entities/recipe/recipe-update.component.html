@@ -1,0 +1,98 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-recipe-heading">Create or edit a Recipe</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!recipe.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="recipe.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="recipe.description" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_prepTime">Prep Time</label>
+                    <input type="number" class="form-control" name="prepTime" id="field_prepTime"
+                        [(ngModel)]="recipe.prepTime" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_cookTime">Cook Time</label>
+                    <input type="number" class="form-control" name="cookTime" id="field_cookTime"
+                        [(ngModel)]="recipe.cookTime" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_servings">Servings</label>
+                    <input type="number" class="form-control" name="servings" id="field_servings"
+                        [(ngModel)]="recipe.servings" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_source">Source</label>
+                    <input type="text" class="form-control" name="source" id="field_source"
+                        [(ngModel)]="recipe.source" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_url">Url</label>
+                    <input type="text" class="form-control" name="url" id="field_url"
+                        [(ngModel)]="recipe.url" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_directions">Directions</label>
+                    <input type="text" class="form-control" name="directions" id="field_directions"
+                        [(ngModel)]="recipe.directions" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_image">Image</label>
+                    <div>
+                        <div *ngIf="recipe.image" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(recipe.imageContentType, recipe.image)">open</a><br>
+                            <span class="pull-left">{{recipe.imageContentType}}, {{byteSize(recipe.image)}}</span>
+                            <button type="button" (click)="recipe.image=null;recipe.imageContentType=null;"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_image" (change)="setFileData($event, recipe, 'image', false)"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="image" id="field_image"
+                        [(ngModel)]="recipe.image" />
+                    <input type="hidden" class="form-control" name="imageContentType" id="field_imageContentType"
+                        [(ngModel)]="recipe.imageContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_difficulty">Difficulty</label>
+                    <select class="form-control" name="difficulty" [(ngModel)]="recipe.difficulty" id="field_difficulty" >
+                        <option value="EASY">EASY</option>
+                        <option value="MEDIUM">MEDIUM</option>
+                        <option value="HARD">HARD</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_notes">Notes</label>
+                    <select class="form-control" id="field_notes" name="notes" [(ngModel)]="recipe.notes">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="notesOption.id === recipe.notes?.id ? recipe.notes : notesOption" *ngFor="let notesOption of notes; trackBy: trackNotesById">{{notesOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="field_category">Category</label>
+                    <select class="form-control" id="field_category" multiple name="category" [(ngModel)]="recipe.categories">
+                        <option [ngValue]="getSelected(recipe.categories, categoryOption)" *ngFor="let categoryOption of categories; trackBy: trackCategoryById">{{categoryOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
